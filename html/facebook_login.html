@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        form {
+            width: 251px;
+            /*box-shadow: x,  y, blur, size, color*/
+            box-shadow: 0px 3px 15px 2px #c6c6c6;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        input {
+            width: 97%;
+            height: 31px;
+            border-radius: 8px;
+            border: solid 1px #d9d9d9;
+            margin: 4px;
+        }
+
+        input.inp {
+            padding-left: 7px;
+        }
+
+        /* id selector*/
+        #create_account {
+            border: solid;
+            padding: 10px;
+            display: inline-block;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: sans-serif;
+            text-decoration: none;
+            background-color: #46d72a;
+            color: white;
+        }
+
+        #login {
+            background-color: #1877f2;
+            color: white;
+            /* bold */
+            font-weight: 800;
+        }
+
+        #forgot_password {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 10px;
+            font-family: sans-serif;
+        }
+
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #bababa;
+            opacity: 1;
+            /* Firefox */
+        }
+
+        ::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!--   without form and name attribute, browser won't pack data-->
+    <form action="">
+        <input type="text" placeholder="Email or Phone Number" class='inp' name="username"><br>
+        <input type="password" placeholder="Password" class='inp' name='password'><br>
+        <input id='login' type="submit" value='Log In'><br>
+        <a id='forgot_password' href="">Forgot Password?</a>
+        <hr>
+        <a id='create_account' href="">Create New Account</a>
+
+        <input type="file">
+    </form>
+</body></html>
