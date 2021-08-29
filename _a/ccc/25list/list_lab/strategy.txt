@@ -1,0 +1,13 @@
+Solve problem steps:
+1. understand problem
+(note: break big puzzle into smaller ones)
+2. write how-to recipe
+3. convert recipe to code
+4. test
+5. (optional) debug
+6. clean code
+
+Debug strategy:
+1. go through
+2. print() statement
+

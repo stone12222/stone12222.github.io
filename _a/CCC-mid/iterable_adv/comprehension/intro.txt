@@ -1,0 +1,2 @@
+Comprehensions allow sequences
+to be built from other sequences

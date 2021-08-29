@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #container {
+            border: solid blue;
+            height: 400px;
+        }
+
+        .item {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(lightblue, blue);
+            font-size: 5rem;
+        }
+
+        #one {
+            position: relative;
+            z-index: 1;
+        }
+
+        #two {
+            position: relative;
+            top: -100px;
+            left: 50px;
+            z-index: 0;
+        }
+
+        /*
+        div[name='first'],div[name='second']{
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(lightblue, blue)
+        }
+*/
+    </style>
+</head>
+
+<body>
+
+    <!--    #container>#one.item+#two.item-->
+    <div id="container">
+        <div id="one" class="item">1</div>
+        <div id="two" class="item">2</div>
+    </div>
+
+</body></html>

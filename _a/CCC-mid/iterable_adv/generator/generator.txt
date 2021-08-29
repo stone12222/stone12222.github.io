@@ -1,0 +1,11 @@
+- generator function can have return statement.
+
+- why generator?
+1. generator function is easy to implement than the iterator class
+2. memory efficient such as produce infinite data. Otherwise, infinite data can not store in memory
+3. pipelining by connecting generators
+file => the third column => ints of third column => sum
+with open('play.log') as file:
+    col_of_mins = (line.split()[2] for line in file)
+    int_col_of_mins = (int(x) for x in col_of_mins)
+    print('Total mins: ',sum(int_col_of_mins))

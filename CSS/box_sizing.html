@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>box_sizing</title>
+    <style>
+        #container {
+            border: solid;
+            height: 400px;
+            width: 600px;
+        }
+
+        .item {
+            height: 200px;
+            width: 300px;
+            /*            block->inline block*/
+            display: inline-block;
+        }
+
+        #one {
+            background-color: blue;
+            border: solid 41px;
+            /* by default, border size not include in the width or height*/
+            /* by default, wdth or height only means content's width and beight*/
+            /* by default, box-sizing is content box*/
+            box-sizing: border-box;
+            /* box-sizing define what the width/height really means*/
+        }
+
+        #two {
+            background-color: orange;
+            margin-left: -5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id='one' class="item"></div>
+        <div id='two' class="item"></div>
+    </div>
+</body></html>

@@ -1,0 +1,385 @@
+/*
+ * Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+var noResult = {l: "No results found"};
+var loading = {l: "Loading search index..."};
+var catModules = "Modules";
+var catPackages = "Packages";
+var catTypes = "Types";
+var catMembers = "Members";
+var catSearchTags = "SearchTags";
+var highlight = "<span class=\"result-highlight\">$&</span>";
+var searchPattern = "";
+var RANKING_THRESHOLD = 2;
+var NO_MATCH = 0xffff;
+var MAX_RESULTS_PER_CATEGORY = 500;
+var UNNAMED = "<Unnamed>";
+function escapeHtml(str) {
+    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function getHighlightedText(item, matcher) {
+    var escapedItem = escapeHtml(item);
+    return escapedItem.replace(matcher, highlight);
+}
+function getURLPrefix(ui) {
+    var urlPrefix="";
+    var slash = "/";
+    if (ui.item.category === catModules) {
+        return ui.item.l + slash;
+    } else if (ui.item.category === catPackages && ui.item.m) {
+        return ui.item.m + slash;
+    } else if (ui.item.category === catTypes || ui.item.category === catMembers) {
+        if (ui.item.m) {
+            urlPrefix = ui.item.m + slash;
+        } else {
+            $.each(packageSearchIndex, function(index, item) {
+                if (item.m && ui.item.p === item.l) {
+                    urlPrefix = item.m + slash;
+                }
+            });
+        }
+        return urlPrefix;
+    }
+    return urlPrefix;
+}
+function makeCamelCaseRegex(term) {
+    var pattern = "";
+    var isWordToken = false;
+    term.replace(/,\s*/g, ", ").trim().split(/\s+/).forEach(function(w, index) {
+        if (index > 0) {
+            // whitespace between identifiers is significant
+            pattern += (isWordToken && /^\w/.test(w)) ? "\\s+" : "\\s*";
+        }
+        var tokens = w.split(/(?=[A-Z,.()<>[\/])/);
+        for (var i = 0; i < tokens.length; i++) {
+            var s = tokens[i];
+            if (s === "") {
+                continue;
+            }
+            pattern += $.ui.autocomplete.escapeRegex(s);
+            isWordToken =  /\w$/.test(s);
+            if (isWordToken) {
+                pattern += "([a-z0-9_$<>\\[\\]]*?)";
+            }
+        }
+    });
+    return pattern;
+}
+function createMatcher(pattern, flags) {
+    var isCamelCase = /[A-Z]/.test(pattern);
+    return new RegExp(pattern, flags + (isCamelCase ? "" : "i"));
+}
+var watermark = 'Search';
+$(function() {
+    $("#search").val('');
+    $("#search").prop("disabled", false);
+    $("#reset").prop("disabled", false);
+    $("#search").val(watermark).addClass('watermark');
+    $("#search").blur(function() {
+        if ($(this).val().length == 0) {
+            $(this).val(watermark).addClass('watermark');
+        }
+    });
+    $("#search").on('click keydown paste', function() {
+        if ($(this).val() == watermark) {
+            $(this).val('').removeClass('watermark');
+        }
+    });
+    $("#reset").click(function() {
+        $("#search").val('');
+        $("#search").focus();
+    });
+    $("#search").focus();
+    $("#search")[0].setSelectionRange(0, 0);
+});
+$.widget("custom.catcomplete", $.ui.autocomplete, {
+    _create: function() {
+        this._super();
+        this.widget().menu("option", "items", "> :not(.ui-autocomplete-category)");
+    },
+    _renderMenu: function(ul, items) {
+        var rMenu = this;
+        var currentCategory = "";
+        rMenu.menu.bindings = $();
+        $.each(items, function(index, item) {
+            var li;
+            if (item.category && item.category !== currentCategory) {
+                ul.append("<li class=\"ui-autocomplete-category\">" + item.category + "</li>");
+                currentCategory = item.category;
+            }
+            li = rMenu._renderItemData(ul, item);
+            if (item.category) {
+                li.attr("aria-label", item.category + " : " + item.l);
+                li.attr("class", "result-item");
+            } else {
+                li.attr("aria-label", item.l);
+                li.attr("class", "result-item");
+            }
+        });
+    },
+    _renderItem: function(ul, item) {
+        var label = "";
+        var matcher = createMatcher(escapeHtml(searchPattern), "g");
+        if (item.category === catModules) {
+            label = getHighlightedText(item.l, matcher);
+        } else if (item.category === catPackages) {
+            label = getHighlightedText(item.l, matcher);
+        } else if (item.category === catTypes) {
+            label = (item.p && item.p !== UNNAMED)
+                    ? getHighlightedText(item.p + "." + item.l, matcher)
+                    : getHighlightedText(item.l, matcher);
+        } else if (item.category === catMembers) {
+            label = (item.p && item.p !== UNNAMED)
+                    ? getHighlightedText(item.p + "." + item.c + "." + item.l, matcher)
+                    : getHighlightedText(item.c + "." + item.l, matcher);
+        } else if (item.category === catSearchTags) {
+            label = getHighlightedText(item.l, matcher);
+        } else {
+            label = item.l;
+        }
+        var li = $("<li/>").appendTo(ul);
+        var div = $("<div/>").appendTo(li);
+        if (item.category === catSearchTags) {
+            if (item.d) {
+                div.html(label + "<span class=\"search-tag-holder-result\"> (" + item.h + ")</span><br><span class=\"search-tag-desc-result\">"
+                                + item.d + "</span><br>");
+            } else {
+                div.html(label + "<span class=\"search-tag-holder-result\"> (" + item.h + ")</span>");
+            }
+        } else {
+            if (item.m) {
+                div.html(item.m + "/" + label);
+            } else {
+                div.html(label);
+            }
+        }
+        return li;
+    }
+});
+function rankMatch(match, category) {
+    if (!match) {
+        return NO_MATCH;
+    }
+    var index = match.index;
+    var input = match.input;
+    var leftBoundaryMatch = 2;
+    var periferalMatch = 0;
+    var delta = 0;
+    // make sure match is anchored on a left word boundary
+    if (index === 0 || /\W/.test(input[index - 1]) || "_" === input[index - 1] || "_" === input[index]) {
+        leftBoundaryMatch = 0;
+    } else if (input[index] === input[index].toUpperCase() && !/^[A-Z0-9_$]+$/.test(input)) {
+        leftBoundaryMatch = 1;
+    }
+    var matchEnd = index + match[0].length;
+    var leftParen = input.indexOf("(");
+    // exclude peripheral matches
+    if (category !== catModules && category !== catSearchTags) {
+        var endOfName = leftParen > -1 ? leftParen : input.length;
+        var delim = category === catPackages ? "/" : ".";
+        if (leftParen > -1 && leftParen < index) {
+            periferalMatch += 2;
+        } else if (input.lastIndexOf(delim, endOfName) >= matchEnd) {
+            periferalMatch += 2;
+        }
+    }
+    for (var i = 1; i < match.length; i++) {
+        // lower ranking if parts of the name are missing
+        if (match[i])
+            delta += match[i].length;
+    }
+    if (category === catTypes) {
+        // lower ranking if a type name contains unmatched camel-case parts
+        if (/[A-Z]/.test(input.substring(matchEnd)))
+            delta += 5;
+        if (/[A-Z]/.test(input.substring(0, index)))
+            delta += 5;
+    }
+    return leftBoundaryMatch + periferalMatch + (delta / 200);
+
+}
+function doSearch(request, response) {
+    var result = [];
+    var newResults = [];
+
+    searchPattern = makeCamelCaseRegex(request.term);
+    if (searchPattern === "") {
+        return this.close();
+    }
+    var camelCaseMatcher = createMatcher(searchPattern, "");
+    var boundaryMatcher = createMatcher("\\b" + searchPattern, "");
+
+    function concatResults(a1, a2) {
+        a2.sort(function(e1, e2) {
+            return e1.ranking - e2.ranking;
+        });
+        a1 = a1.concat(a2.map(function(e) { return e.item; }));
+        a2.length = 0;
+        return a1;
+    }
+
+    if (moduleSearchIndex) {
+        $.each(moduleSearchIndex, function(index, item) {
+            item.category = catModules;
+            var ranking = rankMatch(boundaryMatcher.exec(item.l), catModules);
+            if (ranking < RANKING_THRESHOLD) {
+                newResults.push({ ranking: ranking, item: item });
+            }
+            return newResults.length < MAX_RESULTS_PER_CATEGORY;
+        });
+        result = concatResults(result, newResults);
+    }
+    if (packageSearchIndex) {
+        $.each(packageSearchIndex, function(index, item) {
+            item.category = catPackages;
+            var name = (item.m && request.term.indexOf("/") > -1)
+                ? (item.m + "/" + item.l)
+                : item.l;
+            var ranking = rankMatch(boundaryMatcher.exec(name), catPackages);
+            if (ranking < RANKING_THRESHOLD) {
+                newResults.push({ ranking: ranking, item: item });
+            }
+            return newResults.length < MAX_RESULTS_PER_CATEGORY;
+        });
+        result = concatResults(result, newResults);
+    }
+    if (typeSearchIndex) {
+        $.each(typeSearchIndex, function(index, item) {
+            item.category = catTypes;
+            var name = request.term.indexOf(".") > -1
+                ? item.p + "." + item.l
+                : item.l;
+            var ranking = rankMatch(camelCaseMatcher.exec(name), catTypes);
+            if (ranking < RANKING_THRESHOLD) {
+                newResults.push({ ranking: ranking, item: item });
+            }
+            return newResults.length < MAX_RESULTS_PER_CATEGORY;
+        });
+        result = concatResults(result, newResults);
+    }
+    if (memberSearchIndex) {
+        $.each(memberSearchIndex, function(index, item) {
+            item.category = catMembers;
+            var name = request.term.indexOf(".") > -1
+                ? item.p + "." + item.c + "." + item.l
+                : item.l;
+            var ranking = rankMatch(camelCaseMatcher.exec(name), catMembers);
+            if (ranking < RANKING_THRESHOLD) {
+                newResults.push({ ranking: ranking, item: item });
+            }
+            return newResults.length < MAX_RESULTS_PER_CATEGORY;
+        });
+        result = concatResults(result, newResults);
+    }
+    if (tagSearchIndex) {
+        $.each(tagSearchIndex, function(index, item) {
+            item.category = catSearchTags;
+            var ranking = rankMatch(boundaryMatcher.exec(item.l), catSearchTags);
+            if (ranking < RANKING_THRESHOLD) {
+                newResults.push({ ranking: ranking, item: item });
+            }
+            return newResults.length < MAX_RESULTS_PER_CATEGORY;
+        });
+        result = concatResults(result, newResults);
+    }
+    if (!indexFilesLoaded()) {
+        updateSearchResults = function() {
+            doSearch(request, response);
+        }
+        result.unshift(loading);
+    } else {
+        updateSearchResults = function() {};
+    }
+    response(result);
+}
+$(function() {
+    $("#search").catcomplete({
+        minLength: 1,
+        delay: 300,
+        source: doSearch,
+        response: function(event, ui) {
+            if (!ui.content.length) {
+                ui.content.push(noResult);
+            } else {
+                $("#search").empty();
+            }
+        },
+        autoFocus: true,
+        focus: function(event, ui) {
+            return false;
+        },
+        position: {
+            collision: "flip"
+        },
+        select: function(event, ui) {
+            if (ui.item.category) {
+                var url = getURLPrefix(ui);
+                if (ui.item.category === catModules) {
+                    url += "module-summary.html";
+                } else if (ui.item.category === catPackages) {
+                    if (ui.item.u) {
+                        url = ui.item.u;
+                    } else {
+                        url += ui.item.l.replace(/\./g, '/') + "/package-summary.html";
+                    }
+                } else if (ui.item.category === catTypes) {
+                    if (ui.item.u) {
+                        url = ui.item.u;
+                    } else if (ui.item.p === UNNAMED) {
+                        url += ui.item.l + ".html";
+                    } else {
+                        url += ui.item.p.replace(/\./g, '/') + "/" + ui.item.l + ".html";
+                    }
+                } else if (ui.item.category === catMembers) {
+                    if (ui.item.p === UNNAMED) {
+                        url += ui.item.c + ".html" + "#";
+                    } else {
+                        url += ui.item.p.replace(/\./g, '/') + "/" + ui.item.c + ".html" + "#";
+                    }
+                    if (ui.item.u) {
+                        url += ui.item.u;
+                    } else {
+                        url += ui.item.l;
+                    }
+                } else if (ui.item.category === catSearchTags) {
+                    url += ui.item.u;
+                }
+                if (top !== window) {
+                    parent.classFrame.location = pathtoroot + url;
+                } else {
+                    window.location.href = pathtoroot + url;
+                }
+                $("#search").focus();
+            }
+        }
+    });
+});
+                                                                                                                                                                                                                                           ü®V‰ø0–#õÃÍ2˜±û—∫ÖÏë]é57CúH›¬^pÚ%¯ûbOcp	∏’‚=í¢7≥V∞Rœ´w ò€“Ü˝k8˜Vï°.Ñê~ ÕPdÆäœà≥À?ôp)x &]L7ÂJ•«·wd4öv¸Øõd¨›UÒÊHÃÅ7[6ÊU‹í@Öõ™s.tgõöP˝Êƒ_≠Í«&®Èy}fÉg‹;±-öÃUZÀAÎs≈ªπ˚Åœ\úX”Yƒ°wÒ≥‰‚™Æ9'O)4jÉ‰ˆÆ‹è˚käF±Îø˜C¨røûE23é#¿~∂	≠5∫¿ÎW\ŒıìS≠b^Êº∆¥ïRæBª¬ß[)23Zı—˛ÁïÂW¿ûÓ –EsZóƒïÈõ‚,˛∫u˜ùœyEµI¡πœ•≠•˛ö9d95â”" ^åÈãi›ùÄ¡Â%üÀx"vUÈ¡Ã(‚˛¢Â†
+«&·K¡∑Z˙ﬁèF$éL„\A˚L„í´©PÊÒ—Sj™ˆ¶ßØ1ç/
+H›T®'(@æ◊¡œ ‚‰–Ar∑Tyy…väçö”V¿>ˆåzi'©t™(◊3´∞K◊≥%>Â‡háfÌ˘]dd)KL?πç3+GÖÂY˛§ØJ◊–⁄ƒú0AAR¬¢z‡ª Êµêy/f‰4n&F⁄[J≠¡ã‘GwcÉÓ-£hÙ◊˚ç°–,óß!tIæ∞∫E◊¶*#&SojŒH±ÄÄû3Âﬂ¶qn\¥^qH˝,xô$8ŒÌ9
+6Ê¸Ìé[2xˇ‚¬L†s¢öë>RC|’+A£˙j≠EeFqwV˙”jâE\¡Ã#tvæmÍ≥ é¯"0aON|–ùŒ	E.†dmÉtÿÇ«2>~Pn¬oÔ\π çV«êC0;%3
+TŒ‹M√óù¸ï,7⁄Iäªu|å=ƒH¢”Ä˛KâŒ„˙Ø£Ez!náŒB7ÊBw&M@§G∞àx‡Î√ñ:åπ∑5
+È!h•˝d≥nÅ*›{ö`	8ÛÒ¶f⁄µó¥ﬂ=î…QÄúöltõ—…CûΩ^˘,ÛB&$≤2¯¢zqAå{≠T^ÒÄ§O;‚>Õ∂€f·û8[q±xYs∑‡ü¡–’ÏŸ√2Z§äÏà≈ä][µzWÑˆ@‡wI≤π-•m°*]Æ(T+4 'zL(‚ª]≈“‰∆ß0—?˝òë˝T@ñ¨êÊ)n¡$óÑÔhTz®x≠óJÄ+xÿh]è‹I∏¶∫é©wÚæpõhQÌKÿeˆ¨ÑFÑ„≠ÿpV7ôäÈÏpé»˝ ËhkÄ~%.ÕjUl=U±ÜDü"”ï’Ò”/U‡÷∑·w‰øª/d´4º Ëßì´<ﬂ¢–Iï¡ï5Ù!∏„ø‰MÁﬁ]∞ı5‹Èê˚≈î®Ûs√N(d˙à´¥≠ô)Ø5u™ÅW™‰E¿¯√¥NüÛŸtˆÂÓbóY˝ÜºA—Ú∏V‡Ñ%C’‚ÒA’N·>¥}L¢D §œ«m∑q¬	∑⁄†}B±ˇì”t5zIQYËô<Iı Ü®®Êñ6ä--Il8Áoã'πˆ»?rpÁ£ ^}æ04ÆÖΩ6À∑YìgW»¯ß'í*Åéú™6éã˘C≠§DJóYÃ._dgwÆb‹•ùï{B©0=Â¡#bOf8¬√{:_ ÁÇ[Ñ<dÖ G˚ dnd2m≤∏˘$öß‹†€ú@\…í°s±2,ã$«•^˘Î≈øßõÍ Ù6›$éÁ∞ˇ¯ˆ`ïÕ‘∑J’ÍVª.Ìä¸æYQÚò[∞‰h7Í∏®Ã”á–aZr‰{«ƒe3\Íˆ{©C7óvJì±¨†eÁ‰ßùıXm´Ç1≥≥Òƒèc‹FœÛπÆímËÁzÜ8¶á(ÅÂ0)Ã´[i3(‡P‘1â>-ÛÆ6¯"˜H#ÓÑªôk,K;"öÜ:\5®L¿î±‹'T“√N^Q—N˛n9Ó†8,íÏ¡-K(Æh´ï¬ÍSG:”A       AeIn"gn~        Lngzhuomian~        eg~        
+g~        A'c~        Axying~        xing~        ying~  

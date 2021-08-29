@@ -1,0 +1,18 @@
+Iteration is a general term for reading each element out of something one after another.
+
+An iterable is an object that has an __iter__ method which
+returns an iterator, or which defines a  __getitem__ method
+that can take sequential indexes starting from zero
+(and raises an IndexError when the indexes are no longer valid).
+
+An iterator is an object with a next (Python 2) or
+__next__ (Python 3).
+
+Whenever you use a for loop, or comprehension or generator function in Python.
+for e in [1,2,3]:
+    print(e)
+
+__iter__ method automatically get called,
+then the next method automatically get called
+to get each item from the iterator,
+thus going through the process of iteration

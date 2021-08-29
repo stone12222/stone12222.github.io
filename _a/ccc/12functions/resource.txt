@@ -1,0 +1,2 @@
+pythontutor.com to show local variable and global variables
+and show how computer use stack to keep track of function statement

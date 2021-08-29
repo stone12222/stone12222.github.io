@@ -1,0 +1,8 @@
+row==y or y==row
+col==x or x==col
+
+row==-y or y=-row
+col==x or x==col
+
+This means converting one form to another form is possible
+Also means use yours, you can always convert to another

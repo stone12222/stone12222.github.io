@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 300px;
+            height: 300px;
+            border: solid;
+            font-size: 3rem;
+        }
+
+        #item1 {
+            float: left;
+            background-color: orange;
+        }
+
+        #item2 {
+            float: right;
+            width: 300px;
+            height: 400px;
+        }
+
+        p {
+            border: solid;
+            font-size: 2rem;
+            background-color: lightblue;
+            /* clear means don't put any floating elements on left*/
+            /*            clear: left;*/
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--    .item#item1+.item#item2+p-->
+    <div class="item" id="item1">item1</div>
+    <div class="item" id="item2">item2</div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus quae inventore, laboriosam, est ipsam ullam blanditiis, nulla quaerat iure neque repellat tempora autem illo quo dolorem maiores! Sit, a, laborum?</p>
+
+</body></html>

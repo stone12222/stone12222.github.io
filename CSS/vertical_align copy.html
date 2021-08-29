@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .container {
+            border: solid;
+            width: 400px;
+            height: 300px;
+        }
+
+        #container1 {
+            /*            new*/
+            display: flex;
+        }
+
+        #container2 {
+            position: relative;
+        }
+
+        #container2 #item {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        #item {
+            border: solid;
+            width: 200px;
+            height: 100px;
+            /* vertical center*/
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container1">
+        <div id="item">item</div>
+    </div>
+
+    <div class="container" id="container2">
+        <div id="item">item</div>
+    </div>
+
+</body></html>

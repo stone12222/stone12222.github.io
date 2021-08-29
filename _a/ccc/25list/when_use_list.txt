@@ -1,0 +1,2 @@
+* when the data needs to be ordered (has position)
+* when I need Stack or Queue

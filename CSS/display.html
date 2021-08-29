@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        #block {
+            border: solid;
+            width: 100px;
+            height: 30px;
+        }
+
+        #inline_block {
+            border: solid;
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+        }
+
+        #inline {
+            border: solid;
+            display: inline;
+            font-size: 100px;
+            /*
+            width: 100px;
+            height: 30px;
+*/
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--    3 types of elelments
+   1. block
+   2. inline-block
+   3. inline
+   -->
+
+    <h1>Examples</h1>
+    <div>div is block</div>
+    <button>butoon is an inline-block</button>
+    <span>inline</span>
+    <h1>exam</h1>
+    <ul>
+        <li>width:100% of the container</li>
+        <li>height:0</li>
+        <li>we can change the width and height</li>
+        <li>don't allow inline others in same line</li>
+    </ul>
+    <div id="block"></div>
+    <br>
+    <ul>
+        <li>width:0</li>
+        <li>height:0</li>
+        <li>we can change the width and height</li>
+        <li>allow other inline elements in smae line</li>
+    </ul>
+    <div id="inline_block"></div>
+    <br>
+    <ul>
+        <li>width:0</li>
+        <li>height:15</li>
+        <li>we can't change the width and height</li>
+        <li>allow other inline elements in smae line</li>
+    </ul>
+    <div id="inline"></div>
+
+</body></html>

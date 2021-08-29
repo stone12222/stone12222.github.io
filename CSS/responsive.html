@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>responsive</title>
+    <style>
+        /* responsive design means let web pages paroperly display in different size screens*/
+        /* mobile, tablet, desktop*/
+        div {
+            border: solid;
+            height: 100px;
+            margin-bottom: 20px;
+            background-color: lime;
+        }
+
+        /* :before selects a postion thatt before all other contents in the element(such as body)*/
+        body:before {
+            /* insert an element in that position*/
+            /* use css to create new element*/
+            display: block;
+            font-size: 4rem;
+            content: 'Mobile';
+            width: 260px;
+            height: 100px;
+            border: solid;
+            background-color: red;
+
+        }
+
+        @media print {
+            div {
+                background-color: white;
+                display: none;
+            }
+        }
+
+        /* moble 768 tablet 992 destop 1200 tv*/
+        @media screen and (min-width:700px) {
+            div {
+                display: inline-block;
+                width: 48%;
+                background-color: blueviolet;
+            }
+
+            body:before {
+                content: 'Tablet';
+                font-size: 4rem;
+            }
+        }
+
+        @media screen and (min-width:900px) {
+            div {
+                /*                2x3*/
+                width: 32%;
+                background-color: red;
+            }
+
+            body:before {
+                content: 'Desktop';
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body></html>

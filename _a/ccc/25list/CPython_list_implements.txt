@@ -1,0 +1,8 @@
+CPython list implementation
+https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython
+
+
+Cpython list is variable-length array which is an array
+whose size can be decide in execution time instead of
+in compile time.
+

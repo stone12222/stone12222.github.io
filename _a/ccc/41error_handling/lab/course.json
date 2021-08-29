@@ -1,0 +1,80 @@
+{
+  "lessons": [
+    {
+      "title": "lesson1",
+      "task_list": [
+        {
+          "name": "task1",
+          "task_files": {
+            "task.py": {
+              "placeholders": [
+                {
+                  "line": 2,
+                  "start": 0,
+                  "hint": "",
+                  "possible_answer": "try:",
+                  "length": 21
+                },
+                {
+                  "line": 4,
+                  "start": 0,
+                  "hint": "",
+                  "possible_answer": "except IOError as e:\n    print(\"This file does not exist\")",
+                  "length": 21
+                }
+              ],
+              "name": "task.py"
+            }
+          }
+        },
+        {
+          "name": "task2",
+          "task_files": {
+            "task.py": {
+              "placeholders": [
+                {
+                  "line": 2,
+                  "start": 3,
+                  "hint": "",
+                  "possible_answer": " try:",
+                  "length": 21
+                },
+                {
+                  "line": 4,
+                  "start": 4,
+                  "hint": "",
+                  "possible_answer": "except ZeroDivisionError:\n        print(\"tried to divide by zero!\")\n    finally:\n        print(\"loop has executed \",i,\"times\")",
+                  "length": 21
+                }
+              ],
+              "name": "task.py"
+            }
+          }
+        },
+        {
+          "name": "task3",
+          "task_files": {
+            "task.py": {
+              "placeholders": [
+                {
+                  "line": 4,
+                  "start": 2,
+                  "hint": "",
+                  "possible_answer": "  print(\"the value is :\",values[cur])\n    if type(values[cur]) \u003d\u003d str:\n        raise ValueError(\u0027This is a string\u0027)",
+                  "length": 21
+                }
+              ],
+              "name": "task.py"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "description": "Lab 8: Exceptions",
+  "name": "Lab8",
+  "authors": [
+    {}
+  ],
+  "language": "Python"
+}

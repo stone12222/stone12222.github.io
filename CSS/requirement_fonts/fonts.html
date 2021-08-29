@@ -5,26 +5,42 @@
     <title>Document</title>
     <style>
         p {
-            text-indent: 50px;
+            text-indent: 33px;
+            font-family: sans-serif;
+            line-height: 1.95;
         }
 
         h1 {
+            font-size: 3em;
             font-family: monospace;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: 700;
-            font-size: 40px;
         }
 
-        #j {
+        h1:first-letter {
             color: tomato;
-            font-size: 78px;
+            font-size: 5rem;
+            text-shadow: 1px 2px 2px gray;
+        }
 
+        p:first-line {
+            font-weight: bold;
+        }
+
+        #js {
+            text-transform: uppercase;
+            color: teal
+        }
+
+        div {
+            font-style: italic;
+            text-align: right;
+            text-decoration: underline;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 
 <body>
-    <h1><span id='j'>J</span>avascript</h1>
-    <p>JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. Alongside HTML and CSS, JavaScript is one of the core technologies of the World Wide Web. Over 97% of websites use it client-side for web page behavior, often incorporating third-party libraries. All major web browsers have a dedicated JavaScript engine to execute the code on the user's device.</p>
+    <h1>Javascript</h1>
+    <p class='p'><span id='js'>JavaScript</span>, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions. Alongside HTML and CSS, JavaScript is one of the core technologies of the World Wide Web. Over 97% of websites use it client-side for web page behavior, often incorporating third-party libraries. All major web browsers have a dedicated JavaScript engine to execute the code on the user's device.</p>
+    <div>From Wikipedia, the free encyclopedia</div>
 </body></html>

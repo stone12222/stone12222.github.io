@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #container {
+            border: solid;
+            width: 500px;
+            height: 400px;
+            /*            */
+            overflow: hidden;
+            /* only show scrollbar when necessary*/
+            overflow: auto;
+            /* scroll always show scrollbar*/
+            overflow: scroll;
+        }
+
+        #item1 {
+            width: 600px;
+            height: 100px;
+            background: linear-gradient(to right, blue, white);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="item1"></div>
+        <div id="item2"></div>
+    </div>
+</body></html>

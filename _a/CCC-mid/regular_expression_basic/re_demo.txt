@@ -1,0 +1,64 @@
+regex101.com
+
+A regular expression can always be translated into an equivalent finite state machine.
+
+Regular expression is a pattern for searching in text
+
+format: /pattern/options
+
+for example:
+        655 windermere rd.
+
+        Result:
+        \d+\s+\w+\s+rd\.
+
+        Analysis:
+        \d
+        \s
+        \w+
+        \s
+        \w+
+        \.
+
+        Test:
+        https://regex101.com/
+
+########## re ###########
+literal text
+\d any digit
+\D not a digit (anything but a digit)
+\s any space
+\S anything but a space
+\w any word character, equals to [a-zA-Z0-9_]
+\W anything but a word character
+
+. any chars except new line character
+
+[a-z] match a char from 'a' to 'z'; [A-Z] match 'A' to 'Z'
+[az] only match a or z
+
+\b boundary of a word
+^ (start of whole text, if use option 'multi line', it also means start of line)
+$ (end of whole text, if use option 'multi line', it also means end of line)
+
+### quantifiers ###
+{n}
+{n1,n2}
+
+? 0 or 1
++ 1 or many
+* 0 or many
+
+
+### group ####
+(group) - sub pattern
+use \number to reference group
+|
+
+### make quantifiers lazy ###
+?? lazy
++? lazy
+*? lazy
+
+######
+Each language implements regular expression in a different way, even generally they are same.

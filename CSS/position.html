@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* viewport: the portion of the page we can see*/
+        html {
+            border: solid red;
+            margin: 50px;
+        }
+
+        /*        id selector*/
+        #container {
+            position: relative;
+            /* by default, every element has a static position*/
+            /*psoition: static*/
+            width: 500px;
+            height: 500px;
+            border: solid;
+
+            margin: auto;
+        }
+
+        /*        class selector*/
+        .item {
+            border: solid;
+            width: 100px;
+            height: 100px;
+        }
+
+        #rel {
+            /* relative to its original position*/
+            position: relative;
+            /* top, right, bottom, left*/
+            /* left: 100px;*/
+            right: 60px;
+        }
+
+        /* absolute element relative to a closest container that has non-static position, otherwise, relative to viewport */
+        /* by default, the position is static*/
+        /* non-static: relative, absolute, fixed*/
+        #abs {
+            position: absolute;
+            right: 100px;
+
+        }
+
+        /* fixed position always relative to viewport*/
+        #fix {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-size: cover;
+            background-image: url(https://images.pexels.com/photos/6081495/pexels-photo-6081495.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id='rel' class="item">relative</div>
+        <div id='abs' class="item">absolute</div>
+        <div id='fix' class="item">fixed</div>
+    </div>
+</body></html>

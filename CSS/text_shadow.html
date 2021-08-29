@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        /* rem: root em */
+        /* em: */
+        p {
+            /*            relative unit */
+            /*            root is html */
+            font-size: 8rem;
+            color: orange;
+            transition: 1s
+        }
+
+        /* pesudo selector, selects a state*/
+        /*        css gpu, js cpu*/
+        p:hover {
+            text-shadow: 2px 0px 0px white, 12px 0px 0px #c78100;
+            transform: rotate(360deg)
+        }
+    </style>
+</head>
+
+<!-- what's container (parent) for p-->
+
+<body>
+
+    <main>
+        <p>people</p>
+    </main>
+
+</body></html>
