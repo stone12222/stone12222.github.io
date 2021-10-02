@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>background_attachment_scoll_local</title>
+    <style>
+        body {
+            height: 2000px;
+        }
+
+        div:before {
+            content: '';
+            display: inline-block;
+            width: 100px;
+            height: 1500px;
+            background: linear-gradient(lime, green);
+        }
+
+        div {
+            overflow: auto;
+            border: solid;
+            height: 600px;
+            background-image: url(https://images.pexels.com/photos/146083/pexels-photo-146083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+            /*            by default, background-attachment is scroll which means the background will scroll when page scroll*/
+            background-attachment: scroll;
+            /*            local means scroll in background container*/
+            background-attachment: local;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body></html>

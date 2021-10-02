@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #container {
+            border: solid;
+            width: 400px;
+            height: 300px;
+        }
+
+        #item {
+            width: 300px;
+            height: 100px;
+            background-color: lime;
+
+            /* max-width overrider width*/
+            max-width: 200px;
+
+            /* min-width overrider max-width*/
+            min-width: 350px;
+        }
+
+        #item1 {
+            width: 1000%;
+            /* auto depends on element display type if it is block, auto means 100%, if it is inline element, auto means 0*/
+            width: auto;
+            height: 100px;
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="item"></div>
+        <div id='item1'></div>
+    </div>
+</body></html>
