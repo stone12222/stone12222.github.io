@@ -595,7 +595,7 @@
                 display: inline-block;
                 float: left;
                 padding: 21% 0;
-                padding-bottom: 26%;
+                padding-bottom: 24%;
                 z-index: 0;
                 /*
                 position: relative;
@@ -615,3 +615,21 @@
             #about #about_container2 h2 {
                 font-size: 1.6rem;
             }
+            
+            @media screen and (min-width:1600px) {
+                #about_container1 {
+                    padding: 20% 0;
+                    padding-bottom: 35%;
+                }
+                
+                #project_contianer1 {
+                    padding: 22% 0;
+                    padding-bottom: 34%;
+                }
+                
+                #contact_contianer1 {
+                    padding: 20% 0;
+                    padding-bottom: 24%;
+                }
+            }
+            
