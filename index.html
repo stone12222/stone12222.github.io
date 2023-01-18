@@ -12,532 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Allison&family=Anton&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #main_nav {
-            position: fixed;
-            background-color: #4c7196;
-            width: 100%;
-            text-align: center;
-            padding: 22px 0;
-            z-index: 1;
-        }
-
-        #main_nav div {
-            display: none;
-        }
-
-        #main_nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.15rem;
-            border: solid lightblue;
-            padding: 4px 10px;
-            border-radius: 7px;
-            transition: 1s;
-        }
-
-        #main_nav a:hover {
-            background-color: darkblue;
-            border: solid darkblue;
-            color: #1abc9c;
-        }
-
-        #project {
-            margin: 0 30px;
-        }
-
-
-        /*        the header and title section*/
-        header div {
-            background-image: linear-gradient(90deg, rgba(197, 199, 196, 0.7) 0%, rgba(197, 199, 196, 0.7) 100%), url(https://code.org/shared/images/social-media/codeorg2020_social.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            text-align: center;
-            padding: 220px 0;
-            color: white;
-        }
-
-        header div h3 {
-            font-family: 'Allison', cursive;
-            color: #ffadad;
-            font-size: 2.5rem;
-        }
-
-        header div h1 {
-            font-family: 'Anton', sans-serif;
-            color: whitesmoke;
-            font-size: 4.5rem;
-        }
-
-        /*        about*/
-        #about {
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        #about_container1 {
-            font-family: 'Libre Baskerville', serif;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
-            text-align: center;
-            padding: 180px 0;
-        }
-
-        #about_container1 h2 {
-            font-family: 'Allison', cursive;
-            font-size: 6rem;
-            color: #EF767A;
-
-        }
-
-        #about_container1 nav a {
-            text-decoration: none;
-            color: black;
-            font-size: 0.5rem;
-            transition: 0.2s;
-            border-color: white;
-            padding-bottom: 10px;
-        }
-
-        #about_container1 nav a:hover {
-            border-bottom: solid white;
-        }
-
-        #about #about_container2 {
-            width: calc(100vw - 100px);
-            margin: 45px auto;
-        }
-
-        #about_container2 h2 {
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        #about #about_container2 div {
-            font-size: 0.7rem;
-            font-weight: 400;
-            margin: 25px 0;
-        }
-
-        /*        projects*/
-        #project_contianer1 {
-            background: linear-gradient(to right, #fecfef, #ff9a9e);
-            text-align: center;
-            padding: 180px 0;
-        }
-
-        #project_contianer1 h2 {
-            font-family: 'Allison', cursive;
-            font-size: 3.8rem;
-            color: #4B4A67;
-
-        }
-
-        #projects #project_contianer2 .project {
-            text-align: center;
-            transition: 1s;
-        }
-
-        #projects #project_contianer2 img {
-            width: 100%;
-            transition: 1s;
-        }
-
-        #projects #project_contianer2 img:hover {
-            padding: 6.4vw 0;
-            width: 80%;
-            opacity: 0.6;
-        }
-
-        #projects #project_contianer2 .project:hover {
-            background-color: #2f2f2f;
-        }
-
-        /*        contact*/
-        #contact_contianer1 {
-            background-color: #292929;
-            text-align: center;
-            padding: 180px 0;
-        }
-
-        #contact_contianer1 h2 {
-            font-family: 'Allison', cursive;
-            font-size: 3.8rem;
-            color: #EF767A;
-
-        }
-
-        #contact_contianer2 {
-            text-align: center;
-        }
-
-        .logo {
-            text-align: center;
-            width: 60px;
-            height: 60px;
-            display: inline-block;
-            font-size: 20px;
-            background-color: #1D809F;
-            margin-right: 5px;
-            border-radius: 100%;
-            box-sizing: content-box;
-            transition: 0.5s;
-            margin-top: 20px;
-        }
-
-        #contact #contact_contianer2 .logo:hover {
-            border: solid gray 3px;
-        }
-
-        #icon {
-            color: white;
-            margin-top: 20px;
-        }
-
-        #contact #contact_contianer2 {
-            padding: 100px 0;
-        }
-
-        #contact #contact_contianer2 h1 {
-            font-family: 'Allison', cursive;
-            font-size: 4rem;
-        }
-
-        #contact #contact_contianer2 p {
-            margin: 20px;
-        }
-
-        /*        footer*/
-        footer {
-            text-align: center;
-            background-color: #1a252f;
-            color: white;
-            border: solid #1a252f;
-        }
-
-        footer div {
-            font-size: 0.8rem;
-            margin: 30px 0;
-        }
-
-        /* for contents in the about section*/
-        #indent {
-            margin-left: 35px;
-        }
-
-        #about_container2 #about__me #code {
-            margin-left: 50px;
-        }
-
-        #about_container2 #about__me .information {
-            margin-left: 40px;
-        }
-
-        #about #about_container2 #about__me .inf {
-            margin: 0;
-        }
-
-        .ETitle {
-            margin-left: 50px;
-            padding: 0;
-        }
-
-        .E_div {
-            margin: 0 !important;
-            padding: 0;
-        }
-
-        .cadet,
-        .school {
-            width: 100%
-        }
-
-
-        .img_dis {
-            font-size: 0.4rem !important;
-            margin-top: 0 !important;
-        }
-
-        .ATitle {
-            margin-left: 45px;
-            padding: 0;
-        }
-
-        #about_container2 #accomplishment_awards .awards {
-            margin-left: 90px;
-        }
-
-        #about_container2 #accomplishment_awards .awards b {
-            margin-left: -25px;
-        }
-
-        @media screen and (min-width:576px) {
-            #about_container1 {
-                padding: 220px 0;
-            }
-
-            #about #about_container2 {
-                width: 400px;
-            }
-
-            #project_contianer1 {
-                padding: 220px 0;
-            }
-
-            #projects #project_contianer2 .project {
-                margin: auto;
-                width: 480px;
-            }
-
-            #projects #project_contianer2 img:hover {
-                padding: 25px 0;
-                width: 85%;
-            }
-
-            #contact_contianer1 {
-                padding: 220px 0;
-            }
-
-            #contact_contianer1 h2 {
-                font-size: 4.5rem;
-            }
-        }
-
-        @media screen and (min-width:768px) {
-            #main_nav {
-                text-align: left;
-            }
-
-            #main_nav div {
-                display: inline-block;
-                font-family: 'Anton', sans-serif;
-                font-weight: 700;
-                font-size: 1.3rem;
-                color: white;
-                margin-left: 70px;
-
-            }
-
-            #project {
-                margin: 0 10px;
-            }
-
-            #_about {
-                margin-left: 20%;
-            }
-
-            header div {
-                padding: 340px 0;
-                color: white;
-            }
-
-
-            header div h3 {
-                font-family: 'Allison', cursive;
-                color: #ffadad;
-                font-size: 3.4rem;
-            }
-
-            header div h1 {
-                font-family: 'Anton', sans-serif;
-                color: whitesmoke;
-                font-size: 6rem;
-            }
-
-            #about_container1 {
-                padding: 230px 0;
-            }
-
-            #about_container1 h2 {
-                font-size: 7rem;
-            }
-
-            #about_container1 nav a {
-                font-size: 1rem;
-            }
-
-            #about #about_container2 {
-                width: 70%;
-            }
-
-            #project_contianer1 {
-                padding: 230px 0;
-            }
-
-            #project_contianer1 h2 {
-                font-size: 4.5rem;
-            }
-
-            #projects #project_contianer2 .project {
-                width: 72%;
-            }
-
-            #projects #project_contianer2 img:hover {
-                padding: 6.6% 0;
-                width: 80%;
-            }
-
-            #contact_contianer1 {
-                padding: 230px 0;
-            }
-
-            #contact_contianer1 h2 {
-                font-size: 6rem;
-            }
-        }
-
-        @media screen and (min-width:992px) {
-            #main_nav div {
-                margin-left: calc(100% - 60% - 330px);
-                font-size: 1.4rem;
-            }
-
-            #main_nav a {
-                font-size: 1.25rem;
-            }
-
-            #_about {
-                margin-left: 350px;
-            }
-
-            #main_nav {
-                padding: 27px 0;
-            }
-
-            #about_container1 {
-                padding: 250px 0;
-            }
-
-            #about #about_container2 {
-                width: 694px;
-            }
-
-            #project_contianer1 {
-                padding: 250px 0;
-            }
-
-            #projects #project_contianer2 .project {
-                width: 700px;
-            }
-
-            #contact_contianer1 {
-                padding: 250px 0;
-            }
-        }
-
-        @media screen and (min-width:1200px) {
-            #main_nav div {
-                margin-left: 7%;
-            }
-
-            #_about {
-                margin-left: 47%;
-            }
-
-            header div {
-                padding: 400px 0;
-                color: white;
-            }
-
-            header div h3 {
-                font-family: 'Allison', cursive;
-                color: #ffadad;
-                font-size: 4.5rem;
-            }
-
-            header div h1 {
-                font-family: 'Anton', sans-serif;
-                color: whitesmoke;
-                font-size: 7rem;
-            }
-
-            #about {
-                overflow: auto;
-                width: 50%;
-                padding: 50px 0;
-
-            }
-
-            #about_container1 {
-                position: sticky;
-                top: 88px;
-                width: 50%;
-                display: inline-block;
-                float: left;
-                padding: 18% 0;
-                padding-bottom: 36%;
-                z-index: 0;
-            }
-
-            #about #about_container2 {
-                display: inline-block;
-                margin: 0 0;
-                width: 89.39%;
-            }
-
-            #about_me {
-                margin-top: 18px;
-            }
-
-            #about_container2 div,
-            #about_container2 h2 {
-                position: relative;
-                left: 15%;
-                display: block;
-                width: 400px;
-            }
-
-            /*            */
-            #projects {
-                overflow: auto;
-                width: 50%;
-            }
-
-            #project_contianer1 {
-                position: sticky;
-                top: 88px;
-                width: 50%;
-                display: inline-block;
-                float: left;
-                padding: 22% 0;
-                padding-bottom: 35%;
-                /*                248*/
-            }
-
-            #projects #project_contianer2 .project {
-                width: 100%;
-            }
-
-            /*            */
-            #contact {
-                overflow: auto;
-                width: 50%;
-            }
-
-            #contact_contianer1 {
-                position: relative;
-                width: 50%;
-                display: inline-block;
-                float: left;
-                padding: 210px 0;
-                /*                193.5*/
-            }
-
-            /*            */
-            #about #about_container2 div {
-                font-size: 0.9rem;
-            }
-
-            #about #about_container2 h2 {
-                font-size: 1.6rem;
-            }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -717,23 +192,34 @@
 
         <div id="project_contianer1">
             <h2>Projects I Have Done</h2>
+            <nav>
+                <a href="#pong">Pong</a> <b>|</b>
+                <a href="#block_breaker">Block Breaker</a> <b>|</b>
+                <a href="#tetris">Tetris</a> <b>|</b>
+                <a href="#web1">Website 1</a> <b>|</b>
+                <a href="#web2">Website 2 </a> <b>|</b>
+                <a href="#rob">Robotics Website</a>
+            </nav>
         </div>
         <div id="projects">
             <div id="project_contianer2">
-                <div class="project">
+                <div class="project" id="pong">
                     <a href="pong.html"><img src="https://www.hiig.de/wp-content/uploads/2014/11/Pong1-1200x900.jpg" alt=""></a>
                 </div>
-                <div class="project">
+                <div class="project" id="block_breaker">
                     <a href="block_breaker_game.html"><img src="https://archive.org/serve/BlockBreaker12/BLCE12_screenshot.gif" alt=""></a>
                 </div>
-                <div class="project">
+                <div class="project" id="tetris">
                     <a href="tetris.html"><img src="	https://ychef.files.bbci.co.uk/1280x720/p0102gs2.webp" alt=""></a>
                 </div>
-                <div class="project">
+                <div class="project" id="web1">
                     <a href="stylish_portfolio.html"><img src="https://assets.startbootstrap.com/img/screenshots/themes/stylish-portfolio.png" alt=""></a>
                 </div>
-                <div class="project">
+                <div class="project" id="web2">
                     <a href="start_bootstrap_copy.html"><img src="https://assets.startbootstrap.com/img/screenshots/themes/freelancer.png" alt=""></a>
+                </div>
+                <div class="project" id="rob">
+                    <a href="Website2022-main/index.html"><img src="FRC6854%20-%20Copy.jpg" alt=""></a>
                 </div>
 
             </div>
@@ -751,6 +237,39 @@
                 <p><b><i>Phone:</i></b> 1 (226)-580-7388</p>
                 <p><b><i>WeChat ID:</i></b> wxid_fdtldhuhlcb622</p>
                 <p><b><i>Discord:</i></b> Stone#7907</p>
+
+                <form action="mailto:lei2003.yao@gmail.com" method="GET">
+                    <div id="first">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                    </div>
+
+                    <div id="last">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                    </div>
+
+                    <div id="emails">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" class="form-control" placeholder="Your email address">
+                    </div>
+
+                    <div id="subjects">
+                        <label for="subject">Subject</label>
+                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Your subject of this message">
+                    </div>
+
+                    <div id="messages">
+                        <label for="body">Message</label>
+                        <textarea name="body" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about me"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send Message" class="btn">
+                    </div>
+
+                </form>
+
                 <a href="https://www.facebook.com/profile.php?id=100008986263701">
                     <div class='logo'>
                         <i class="fab fa-facebook-f" id='icon'></i>
@@ -766,12 +285,15 @@
                         <i class="fab fa-instagram" id='icon'></i>
                     </div>
                 </a>
+                <a href="https://www.linkedin.com/in/yao-lei-463098241/">
+                    <div class='logo'>
+                        <i class="fab fa-linkedin" id='icon'></i>
+                    </div>
+                </a>
             </div>
         </div>
     </main>
     <footer>
-        <div>Copyright &copy; 2021-2022 Stone Yao's Website 2022</div>
+        <div>Copyright &copy; 2021-2023 Stone Yao's Website 2023</div>
     </footer>
-</body>
-
-</html>
+</body></html>

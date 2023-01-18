@@ -1,0 +1,8 @@
+<div class="col-md-4 col-sm-4 animate-box" data-animate-effect="fadeInUp">
+	<div class="team6854-post">
+		<span class="team6854-date">Sep. 12th</span>
+		<h3><a href="blog">Title</a></h3>
+		<p>Description goes here.</p>
+		<p class="author"><cite> Author</cite></p>
+	</div>
+</div>

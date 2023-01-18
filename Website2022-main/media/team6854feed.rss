@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="www.team6854.com/css/styles.css" media="screen"?>
+<rss version="2.0">
+  <channel>
+    <generator>RSS Builder by B!Soft</generator>
+    <title>Team 6854</title>
+    <link>www.team6854.com</link>
+    <description>FRC 6854 official news feed</description>
+    <language>en-us</language>
+    <copyright>Team 6854 2018</copyright>
+    <image>
+      <title>Team 6854</title>
+      <link>www.team6854.com</link>
+      <url>http://team6854.com/images/Valkyrie/valkyrie_onecolor_inverted_hollow.png</url>
+    </image>
+    <item>
+      <title>Sponsorship Levels</title>
+      <pubDate>Sat, 28 Jul 2018 11:34:21 -0400</pubDate>
+      <author>Collin</author>
+      <category>News</category>
+      <description><![CDATA[Today we are restructuring our sponsorship levels and our sponsor site! Our sponsors will have a better representation of their company and an easy way for new companies to sponsor us!]]></description>
+    </item>
+    <item>
+      <title>Argosy Grant Lessons Learned</title>
+      <pubDate>Thu, 19 Jul 2018 11:35:23 -0400</pubDate>
+      <author>Mrs. Medd</author>
+      <category>News</category>
+      <description><![CDATA[As a part of the Argosy grant we earned in our rookie season, we were asked to post some of our lessons learned to help future rookie teams to be successful. <a href="http://www.team6854.com/media/LessonsLearnedByFRC6854.pdf">Here is our advice.</a>]]></description>
+    </item>
+    <item>
+      <title>Kelseys KICKBACK Night</title>
+      <pubDate>Fri, 08 Feb 2019 16:31:00 -0400</pubDate>
+      <author>Ben Helleman</author>
+      <category>News</category>
+      <description><![CDATA[FRC6854 is hosting a KICKBACK Night at Kelseys North London on February 19 from 4:30pm to 10:00pm. See Mr. Helleman at A.B.Lucas or email frc6854@gotvdsb.ca to obtain a card. We will recieve 20% of all food sales for the night minus alcohol sales. Mark your calendars and encourage your family and friends to attend! Takout is as good as dine-in with a card.]]></description>
+    </item>
+    <item>
+      <title>New Website</title>
+      <pubDate>Thu, 19 Jul 2018 11:36:46 -0400</pubDate>
+      <author>Collin</author>
+      <category>News</category>
+      <description><![CDATA[This is our new and improved website. Add this to your bookmarks for the latest news from the team!]]></description>
+    </item>
+  </channel>
+</rss>

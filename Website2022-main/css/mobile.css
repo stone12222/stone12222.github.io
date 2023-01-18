@@ -1,0 +1,37 @@
+/* Fix for sponsors container */
+
+.sponsor {
+    width: 200px !important;
+    margin: 25px;
+    padding: 0;
+}
+
+.sponsors div {
+    display: inline !important;
+}
+
+.sponsor img {
+    background-color: white;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.sponsors {
+    width: 100% !important;
+    text-align: center;
+}
+
+@media only screen and (max-width : 480px) {
+    .sponsor-bar {
+      width: 100% !important;
+    }
+    .sponsor {
+        float: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        width: 125px !important;
+    }
+    .sponsors div {
+        margin: 25 auto;
+    }
+}
