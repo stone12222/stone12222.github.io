@@ -91,8 +91,30 @@
                         <li>Racket</li>
                     </ul>
                 </div>
-                <h2 id='t/e_I_do'>Things/extracurricular I do (update needed)</h2>
+
+                <h2 id='t/e_I_do'>A little More About Me</h2>
                 <div>
+                    <div class="E_div">
+                        I'm a passionate computer science student with a love for software development. I'm always eager to learn new things and self-motivated with solid problem-investigation and solving skills. I have strong communication skills and the ability to work in small/large groups. I've had the opportunity to gain experience in several programming languages, and I was involved in multiple individual and team projects. I'm excited to continue learning and growing in computer science.
+                    </div>
+                    <br>
+                    <h4 class='ETitle'>Work Experience:</h4>
+                    <div class="E_div">
+                        <span id='indent'>I</span> do not have any work experience yet but I am currently seeking for 2023 fall internship/co-op opportunities.
+                    </div>
+                    <br>
+                    <h4 class='ETitle'>Volunteer/Other Experience:</h4>
+                    <div class="E_div">
+                        <span id='indent'>To</span> be updated
+                    </div>
+                    <br>
+                    <div class="E_div">
+                        To learn more about me go check out my <a href="https://www.linkedin.com/in/yl-yao-lei/">linkedin</a> page. To see my resume click the link below:
+                    </div>
+                    <br>
+                    <span id='indent'><a href="https://www.linkedin.com/in/yl-yao-lei/">My Resume</a></span>
+<!--outdated information, saved for histroy reason only             -->
+<!--
                     <h4 class='ETitle'>Outside School Extracurricular:</h4>
                     <div class='E_div'>
                         <span id='indent'>I </span>have been a part of the Air Cadets program since grade 7. My rank is currently Flight Sergeant, and I am waiting to get Warrant Officer Second Class. I have been a part of the flag party as a guard. I attended the remembrance day parade and guarded the memorial overnight. I have also taken leadership roles such as second in command, flight commander and deputy squadron warrant officer, where I command a group of cadets on parades and regular training. I am also an instructor, and on a typical weekly training night, I would teach lessons to lower-level cadets. I also passed the harshed selection of exams, file reviews and in-person interviews and got my offer to the pilot scholarship program. However, with the sudden appearance of COVID-19, I could not attend.
@@ -127,6 +149,9 @@
                         <img class='school' src="model_un.jpg" alt="">
                         <div class='img_dis'>2019 Lucas Model UN conferences (I'm on the right)</div>
                     </div>
+-->
+               
+               
                 </div>
                 <h2 id='accomplishment'>Accomplishment</h2>
                 <div id='accomplishment_awards'>
@@ -199,6 +224,9 @@
                 <a href="#web1">Website 1</a> <b>|</b>
                 <a href="#web2">Website 2 </a> <b>|</b>
                 <a href="#rob">Robotics Website</a>
+                <br>
+                <br>
+                <a href="project.html">More About My Project</a>
             </nav>
         </div>
         <div id="projects">
@@ -296,4 +324,27 @@
     <footer>
         <div>Copyright &copy; 2021-2023 Stone Yao's Website 2023</div>
     </footer>
-</body></html>
+</body>
+
+<!-- jquery for formatting-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var window_width = $('body').width();
+        var padding = $('#contact_contianer2').outerHeight() / 2 + 3;
+        console.log(padding);
+        console.log(window_width);
+        if (padding > 0 && window_width >= 1600) {
+            $('#contact_contianer1').css("padding-top", padding - 35);
+            $('#contact_contianer1').css("padding-bottom", padding + 35);
+        } else {
+          console.log('Content height is 0 or undefined.');
+        }
+    });
+    
+    $(window).resize(function() {
+        location.reload();
+    });
+</script>
+
+</html>

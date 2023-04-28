@@ -534,7 +534,7 @@
 
             #about_container1 {
                 position: sticky;
-                top: 88px;
+                top: 10px;
                 width: 50%;
                 display: inline-block;
                 float: left;
@@ -569,7 +569,7 @@
 
             #project_contianer1 {
                 position: sticky;
-                top: 88px;
+                top: 10px;
                 width: 50%;
                 display: inline-block;
                 float: left;
@@ -590,7 +590,7 @@
 
             #contact_contianer1 {
                 position: sticky;
-                top: 88px;
+                top: 10px;
                 width: 50%;
                 display: inline-block;
                 float: left;
@@ -617,10 +617,23 @@
             }
             
             @media screen and (min-width:1600px) {
+                #_about {
+                    margin-left: 60%;
+
+                }
                 #about_container1 {
                     padding: 20% 0;
                     padding-bottom: 35%;
                 }
+                
+                #about_container2 {
+                    width: 90% !important;
+                }
+                
+                #about {
+                    padding-left: 25px;
+                    padding-right: 25px;
+                }  
                 
                 #project_contianer1 {
                     padding: 22% 0;
@@ -628,8 +641,6 @@
                 }
                 
                 #contact_contianer1 {
-                    padding: 20% 0;
-                    padding-bottom: 24%;
+                    height: 0;
                 }
             }
-            
