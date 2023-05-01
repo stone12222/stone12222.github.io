@@ -19,7 +19,7 @@
     <nav id='main_nav'>
         <div>Stone's Personal Website</div>
         <a href="#about" id='_about'>About</a>
-        <a href="#projects" id='project'>Projects</a>
+        <a href="#project_contianer1" id='project'>Projects</a>
         <a href="#contact">Contact me</a>
     </nav>
     <header>
@@ -112,9 +112,9 @@
                         To learn more about me go check out my <a href="https://www.linkedin.com/in/yl-yao-lei/">linkedin</a> page. To see my resume click the link below:
                     </div>
                     <br>
-                    <span id='indent'><a href="https://www.linkedin.com/in/yl-yao-lei/">My Resume</a></span>
-<!--outdated information, saved for histroy reason only             -->
-<!--
+                    <span id='indent'><a href="lei_resume.pdf" attributes-list download>My Resume</a></span>
+                    <!--outdated information, saved for histroy reason only             -->
+                    <!--
                     <h4 class='ETitle'>Outside School Extracurricular:</h4>
                     <div class='E_div'>
                         <span id='indent'>I </span>have been a part of the Air Cadets program since grade 7. My rank is currently Flight Sergeant, and I am waiting to get Warrant Officer Second Class. I have been a part of the flag party as a guard. I attended the remembrance day parade and guarded the memorial overnight. I have also taken leadership roles such as second in command, flight commander and deputy squadron warrant officer, where I command a group of cadets on parades and regular training. I am also an instructor, and on a typical weekly training night, I would teach lessons to lower-level cadets. I also passed the harshed selection of exams, file reviews and in-person interviews and got my offer to the pilot scholarship program. However, with the sudden appearance of COVID-19, I could not attend.
@@ -150,8 +150,8 @@
                         <div class='img_dis'>2019 Lucas Model UN conferences (I'm on the right)</div>
                     </div>
 -->
-               
-               
+
+
                 </div>
                 <h2 id='accomplishment'>Accomplishment</h2>
                 <div id='accomplishment_awards'>
@@ -226,7 +226,7 @@
                 <a href="#rob">Robotics Website</a>
                 <br>
                 <br>
-                <a href="project.html">More About My Project</a>
+                <a href="project.html" id="more_about">More About My Project</a>
             </nav>
         </div>
         <div id="projects">
@@ -338,13 +338,11 @@
             $('#contact_contianer1').css("padding-top", padding - 35);
             $('#contact_contianer1').css("padding-bottom", padding + 35);
         } else {
-          console.log('Content height is 0 or undefined.');
+            console.log('Content height is 0 or undefined.');
         }
     });
-    
+
     $(window).resize(function() {
         location.reload();
     });
-</script>
-
-</html>
+</script></html>
